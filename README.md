@@ -11,8 +11,8 @@
 ![image](https://github.com/a0188000/Share-Extension/blob/master/Steps/step2.png)
 
 二、 申請App Groups ID
+     App Group ID 開頭必須是 group.
 ![image](https://github.com/a0188000/Share-Extension/blob/master/Steps/step3.png)
-    App Group ID 開頭必須是 group.
     
 三、回Xcode設置 Bundle ID
 ![image](https://github.com/a0188000/Share-Extension/blob/master/Steps/step4.png)
