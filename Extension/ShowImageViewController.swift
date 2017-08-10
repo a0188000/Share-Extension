@@ -10,12 +10,21 @@ import UIKit
 
 class ShowImageViewController: UIViewController {
 
+    @IBOutlet weak var myImageView: UIImageView!
+    var filePath: String!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        print("\(filePath)")
+        show()
     }
 
+    func show() {
+        guard let path = filePath else { return }
+        myImageView.image = UIImage(contentsOfFile: path)
+        print("\(NSTemporaryDirectory())")
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
