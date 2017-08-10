@@ -21,3 +21,5 @@
 ![image](https://github.com/a0188000/Share-Extension/blob/master/Steps/step5.png)
     開啟後會看到剛剛所註冊的App Groups Name，選擇你要使用的Groups
 ![image](https://github.com/a0188000/Share-Extension/blob/master/Steps/step6.png)
+
+如果是要跟Extension共用資料必須使用App Geoups才能共用，因此在TARETS那邊選擇你的Extension並重複第四步驟
