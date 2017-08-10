@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB8031301F3C3ED90098F0B5 /* abc.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB80312F1F3C3ED90098F0B5 /* abc.jpg */; };
 		AB9C85781F3BE54D006F9E4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C85771F3BE54D006F9E4C /* AppDelegate.swift */; };
 		AB9C857A1F3BE54D006F9E4C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C85791F3BE54D006F9E4C /* ViewController.swift */; };
 		AB9C857D1F3BE54D006F9E4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB9C857B1F3BE54D006F9E4C /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AB80312F1F3C3ED90098F0B5 /* abc.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = abc.jpg; sourceTree = "<group>"; };
 		AB9C85741F3BE54D006F9E4C /* Extension.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Extension.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9C85771F3BE54D006F9E4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB9C85791F3BE54D006F9E4C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		AB9C85761F3BE54D006F9E4C /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				AB80312F1F3C3ED90098F0B5 /* abc.jpg */,
 				AB9C859C1F3BE680006F9E4C /* Extension.entitlements */,
 				AB9C85771F3BE54D006F9E4C /* AppDelegate.swift */,
 				AB9C85791F3BE54D006F9E4C /* ViewController.swift */,
@@ -216,6 +219,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB8031301F3C3ED90098F0B5 /* abc.jpg in Resources */,
 				AB9C85821F3BE54D006F9E4C /* LaunchScreen.storyboard in Resources */,
 				AB9C857F1F3BE54D006F9E4C /* Assets.xcassets in Resources */,
 				AB9C857D1F3BE54D006F9E4C /* Main.storyboard in Resources */,
