@@ -7,22 +7,36 @@
 //
 
 import UIKit
-
+import WebKit
 class ShowImageViewController: UIViewController {
-
+    
     @IBOutlet weak var myImageView: UIImageView!
     var filePath: String!
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("\(filePath)")
-        show()
+        let type = filePath.components(separatedBy: ".").last
+        if type == "pdf" {
+            openPDF()
+            title = "是PDF"
+            view.sendSubview(toBack: myImageView)
+        } else {
+            title = "是圖片"
+            showImage()
+        }
     }
-
-    func show() {
+    
+    func showImage() {
         guard let path = filePath else { return }
         myImageView.image = UIImage(contentsOfFile: path)
-        print("\(NSTemporaryDirectory())")
-        
+    }
+    
+    func openPDF() {
+        let webView = WKWebView(frame: CGRect(x: 0, y: 64, width: view.frame.width, height: view.frame.height))
+        view.addSubview(webView)
+        guard let path = filePath else { return }
+        let url = URL(fileURLWithPath: path)
+        let data = try? Data(contentsOf: url)
+        webView.load(data!, mimeType: "application/pdf", characterEncodingName: "", baseURL: url.deletingLastPathComponent())
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,15 +44,5 @@ class ShowImageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

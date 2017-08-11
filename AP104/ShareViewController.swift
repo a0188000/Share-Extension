@@ -10,40 +10,31 @@ import UIKit
 import Social
 
 class ShareViewController: SLComposeServiceViewController {
-
+    
     var listCount: Int = 0
+    var fileName: String!
     
     override func isContentValid() -> Bool {
         // Do validation of contentText and/or NSExtensionContext attachments here
         return true
     }
-
+    
     override func didSelectPost() {
-
+        
         guard let inputItem: [NSExtensionItem] = self.extensionContext?.inputItems as? [NSExtensionItem] else { return }
         for item in inputItem {
             guard let attachments = item.attachments as? [NSItemProvider] else { return }
             for itemProvider in attachments {
                 if itemProvider.hasItemConformingToTypeIdentifier("public.image") {
-                    itemProvider.loadItem(forTypeIdentifier: "public.image", options: nil,  completionHandler: { (item, error) in
-                        if (error != nil) {
-                            print("error:\(error.localizedDescription)")
-                        }
-                        let image = UIImage(data: NSData(contentsOf: item as! URL)! as Data)
-                        if image != nil {
-                            DispatchQueue.main.async {
-                                self.writeFileToFileManager(image: image!)
-                            }
-                            
-                        } else {
-                            print("done fail")
-                        }
-                        
+                    itemProvider.loadItem(forTypeIdentifier: "public.image", options: nil,  completionHandler: { (item: NSSecureCoding?, error: Error!) in
+                        self.fileName = (item as! URL).lastPathComponent
+                        self.writeFileToFileManager(item: item)
                     })
-                } else {
-                    print("type error")
+                } else if itemProvider.hasItemConformingToTypeIdentifier("com.adobe.pdf") {
+                    itemProvider.loadItem(forTypeIdentifier: "com.adobe.pdf", options: nil, completionHandler: { (item: NSSecureCoding?, error: Error!) in
+                        self.writePDFToFileManager(item: item)
+                    })
                 }
-                
             }
         }
         self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
@@ -64,42 +55,43 @@ class ShareViewController: SLComposeServiceViewController {
             } catch {
                 print("創建資料夾失敗")
             }
-            
         } else {
             print("資料夾以存在")
-        }
-        do {
-            let list = try FileManager.default.contentsOfDirectory(atPath: imageDirectoryPath)
-            for file in list {
-                if file != ".DS_Store" {
-                    listCount += 1
-                }
-            }
-        } catch {
-            print("not fend")
         }
         return directoryPath.appendingPathComponent("image")
     }
     
-    func writeFileToFileManager(image: UIImage) {
-        guard let path = self.getDocumentsDirectory()?.appendingPathComponent(fileName()) else { return }
-        
-        let imageData = UIImagePNGRepresentation(image)
+    func writeFileToFileManager(item: NSSecureCoding?) {
+        guard let url = item as? URL else { return }
         do {
-            try imageData?.write(to: path)
-            print("write done")
+            let data = try Data(contentsOf: url)
+            let image = try UIImage(data: data)
+            if let image = image {
+                guard let path = self.getDocumentsDirectory()?.appendingPathComponent(fileName) else { return }
+                let imageData = UIImagePNGRepresentation(image)
+                try imageData?.write(to: path)
+            }
         } catch {
-            print("write fail")
+            print("\(error.localizedDescription)")
         }
     }
     
-    func fileName() -> String{
-        return "copy".appending(String(listCount + 1)) + ".png"
+    func writePDFToFileManager(item: NSSecureCoding?) {
+        let pdfPath = item as! URL
+        self.fileName = pdfPath.lastPathComponent
+        var filePath = self.getDocumentsDirectory()?.appendingPathComponent(self.fileName).absoluteString
+        filePath = filePath?.replacingOccurrences(of: "file://", with: "")
+        let finalPath = URL(fileURLWithPath: filePath!)
+        do {
+            try FileManager.default.copyItem(at: pdfPath, to: finalPath)
+        } catch {
+            print("可惡")
+        }
     }
     
     override func configurationItems() -> [Any]! {
         // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.
         return []
     }
-
+    
 }

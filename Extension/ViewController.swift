@@ -96,7 +96,7 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource {
                 let file = directoryPath.appending(filesName[indexPath.row])
                 try FileManager.default.removeItem(atPath: file)
                 filesName.remove(at: indexPath.row)
-                self.tableView.reloadData()
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
             } catch {
                 print("error")
             }
