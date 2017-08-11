@@ -23,3 +23,4 @@
 ![image](https://github.com/a0188000/Share-Extension/blob/master/Steps/step6.png)
 
 如果是要跟Extension共用資料必須使用App Geoups才能共用，因此在TARETS那邊選擇你的Extension並重複第四步驟
+
