@@ -5,7 +5,7 @@
 
 # 如何申請APP Group
 
-一、 申請APP ID
+##一、 申請APP ID##
 ![image](https://github.com/a0188000/Share-Extension/blob/master/Steps/step1.png)
     Bundle ID需與專案Bundle ID一致
 ![image](https://github.com/a0188000/Share-Extension/blob/master/Steps/step2.png)
